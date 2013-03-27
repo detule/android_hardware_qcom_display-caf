@@ -15,3 +15,4 @@ ifneq ($(filter msm8960,$(TARGET_BOARD_PLATFORM)),)
 endif
 endif
 endif
+endif
