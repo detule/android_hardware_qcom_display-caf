@@ -37,6 +37,7 @@ namespace overlay {
 using namespace utils;
 
 Overlay::Overlay() {
+    char property[PROPERTY_VALUE_MAX];
     if (property_get("debug.mdpcomp.maxlayer", property, NULL) > 0) {
         PipeBook::NUM_PIPES = atoi(property);
     } else {
