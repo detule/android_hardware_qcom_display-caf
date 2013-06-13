@@ -208,12 +208,10 @@ int IonController::allocate(alloc_data& data, int usage)
             ionFlags |= ION_HEAP(ION_IOMMU_HEAP_ID);
         }
     } else if(usage & GRALLOC_USAGE_PRIVATE_MM_HEAP) {
-        //MM Heap is exclusively a secure heap.
-        //If it is used for non secure cases, fallback to IOMMU heap
-        ALOGW("GRALLOC_USAGE_PRIVATE_MM_HEAP \
-                                cannot be used as an insecure heap!\
-                                trying to use IOMMU instead !!");
-        ionFlags |= ION_HEAP(ION_IOMMU_HEAP_ID);
+        //MM Heap security is controller by kernel driver.
+        //Let kernel driver make decisions whether non secure
+        //MM allocations are appropriate.
+        ionFlags |= ION_HEAP(ION_CP_MM_HEAP_ID);
     }
 
     if(usage & GRALLOC_USAGE_PRIVATE_ADSP_HEAP)
